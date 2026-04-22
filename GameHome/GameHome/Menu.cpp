@@ -7,13 +7,13 @@ Menu::Menu()
     background.setFillColor(sf::Color(30, 30, 60));
 
     playButton.setSize({ 200.f, 50.f });
-    playButton.setFillColor(sf::Color(70, 130, 180));
+    playButton.setFillColor(sf::Color(0, 180, 0));
     playButton.setPosition({ 400.f, 400.f });
 
     quitButton.setSize({ 200.f, 50.f });
-    quitButton.setFillColor(sf::Color(180, 70, 70));
+    quitButton.setFillColor(sf::Color(180, 0, 10));
     quitButton.setPosition({ 400.f, 500.f });
-
+        
     imageTexture = new sf::Texture("assets/home.jpg");
     imageSprite = new sf::Sprite(*imageTexture);
     imageSprite->setPosition({ 0.f, 0.f });

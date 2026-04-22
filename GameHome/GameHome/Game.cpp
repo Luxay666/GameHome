@@ -25,11 +25,10 @@ void Game::handleEvent(const std::optional<sf::Event>& event)
             if (e->button == sf::Mouse::Button::Left)
             {
                 clickCount++;
-                float width = std::min(clickCount * 10.f, 500.f);
+                float width = std::min(clickCount * 10.f, 1000.f);
                 clickBar.setSize({ width, 20.f });
-                std::cout << "Clics: " << clickCount << std::endl;
             }
-            if (clickCount >= 50)
+            if (clickCount >= 100)
             {
                 std::cout << "You win!" << std::endl;
                 state = GameState::Menu;
@@ -52,7 +51,6 @@ void Game::draw()
         menu.draw(window);
     else
     {
-        // Fond noir + barre verte qui grandit
         window.draw(clickBar);
     }
 }
