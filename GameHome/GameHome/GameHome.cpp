@@ -1,21 +1,23 @@
-#include <SFML/Graphics.hpp>
+﻿#include <SFML/Graphics.hpp>
 #include "Game.h"
+
+#define windowWidth 1000
+#define windowHeight 1000
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({ 1000, 1000 }), "Simulation");
+    sf::RenderWindow window(sf::VideoMode({ windowWidth, windowHeight }), "Simulation");
     window.setVerticalSyncEnabled(true);
 
-    Game game(window);
+    Game game(window, windowWidth, windowHeight);
 
     while (window.isOpen())
     {
-        while (const std::optional event = window.pollEvent())
+        while (std::optional<sf::Event> event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
                 window.close();
-
-            game.handleEvent(event);
+             game.handleEvent(event);
         }
 
         game.update();
