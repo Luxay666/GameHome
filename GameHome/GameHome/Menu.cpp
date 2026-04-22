@@ -1,62 +1,49 @@
-#include "Menu.h"
+﻿#include "Menu.h"
 #include <iostream>
 
-Menu::Menu(sf::RenderWindow& window)
-    : window(window)
+Menu::Menu()
 {
-    // Font
-    font.emplace();
-    if (!font->openFromFile("assets/OldeTome.ttf"))
-    {
-        std::cout << "ERREUR: police introuvable" << std::endl;
-    }
+    // Bouton
+    playButton.setSize({ 200.f, 80.f });
+    playButton.setFillColor(sf::Color::Green);
+    playButton.setPosition({ 400.f, 450.f });
 
-    // Titre
-    titleText.emplace(*font, "MON JEU", 80);
-    titleText->setFillColor(sf::Color::White);
-    titleText->setPosition({ 300.f, 150.f });
+    // Police
+    if (!font.loadFromFile("arial.ttf"))
+        std::cout << "Erreur chargement police\n";
 
-    // Bouton Play
-    playButton.setPosition({ 350.f, 400.f });
-    playButton.setFillColor(sf::Color(70, 130, 180));
-
-    playText.emplace(*font, "Play", 50);
-    playText->setFillColor(sf::Color::White);
-    playText->setPosition({ 435.f, 410.f });
-
-    // Bouton Quit
-    quitButton.setPosition({ 350.f, 550.f });
-    quitButton.setFillColor(sf::Color(180, 70, 70));
-
-    quitText.emplace(*font, "Quit", 50);
-    quitText->setFillColor(sf::Color::White);
-    quitText->setPosition({ 435.f, 560.f });
+    // Texte
+    playText.setFont(font);
+    playText.setString("PLAY");
+    playText.setCharacterSize(30);
+    playText.setFillColor(sf::Color::Black);
+    playText.setPosition({ 460.f, 470.f });
 }
 
-void Menu::handleEvent(const std::optional<sf::Event>& event)
+void Menu::handleEvent(const std::optional<sf::Event>& event, sf::RenderWindow& window)
 {
-    if (const auto* e = event->getIf<sf::Event::MouseButtonPressed>())
+    if (!event) return;
+
+    if (event->is<sf::Event::MouseButtonPressed>())
     {
-        if (e->button == sf::Mouse::Button::Left)
+        auto mouseEvent = event->getIf<sf::Event::MouseButtonPressed>();
+
+        if (mouseEvent && mouseEvent->button == sf::Mouse::Button::Left)
         {
-            sf::Vector2f mouse = { (float)e->position.x, (float)e->position.y };
+            sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 
-            if (playButton.getGlobalBounds().contains(mouse))
+            if (playButton.getGlobalBounds().contains((sf::Vector2f)mousePos))
+            {
                 playClicked = true;
-
-            if (quitButton.getGlobalBounds().contains(mouse))
-                window.close();
+            }
         }
     }
 }
 
-void Menu::draw()
+void Menu::draw(sf::RenderWindow& window)
 {
     window.draw(playButton);
-    window.draw(quitButton);
-    if (titleText) window.draw(*titleText);
-    if (playText)  window.draw(*playText);
-    if (quitText)  window.draw(*quitText);
+    window.draw(playText);
 }
 
 bool Menu::isPlayClicked() const

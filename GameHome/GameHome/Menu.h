@@ -5,20 +5,16 @@
 class Menu
 {
 public:
-    Menu(sf::RenderWindow& window);
-    void handleEvent(const std::optional<sf::Event>& event);
-    void draw();
+    Menu();
+
+    void handleEvent(const std::optional<sf::Event>& event, sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window);
+
     bool isPlayClicked() const;
 
 private:
-    sf::RenderWindow& window;
+    sf::RectangleShape playButton;
+    sf::Text playText;
+    sf::Font font;
     bool playClicked = false;
-
-    std::optional<sf::Font> font;
-    std::optional<sf::Text> titleText;
-    std::optional<sf::Text> playText;
-    std::optional<sf::Text> quitText;
-
-    sf::RectangleShape playButton{ {300.f, 80.f} };
-    sf::RectangleShape quitButton{ {300.f, 80.f} };
 };

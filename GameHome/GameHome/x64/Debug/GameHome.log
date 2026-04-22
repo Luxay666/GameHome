@@ -1,0 +1,12 @@
+﻿  Game.cpp
+  GameHome.cpp
+  Menu.cpp
+D:\Documents\GitHub\GameHome\GameHome\GameHome\Menu.cpp(5,1): error C2512: 'sf::Text' : aucun constructeur par défaut approprié disponible
+      D:\Documents\GitHub\GameHome\GameHome\include\SFML\Graphics\Text.hpp(56,25):
+      voir la déclaration de 'sf::Text'
+  
+D:\Documents\GitHub\GameHome\GameHome\GameHome\Menu.cpp(12,15): error C2039: 'loadFromFile' n'est pas membre de 'sf::Font'
+      D:\Documents\GitHub\GameHome\GameHome\include\SFML\Graphics\Font.hpp(57,25):
+      voir la déclaration de 'sf::Font'
+  
+  Génération de code en cours...

@@ -2,14 +2,13 @@
 
 Game::Game(sf::RenderWindow& window)
     : window(window)
-    , menu(window)
 {
 }
 
 void Game::handleEvent(const std::optional<sf::Event>& event)
 {
     if (state == GameState::Menu)
-        menu.handleEvent(event);
+        menu.handleEvent(event, window);
 }
 
 void Game::update()
@@ -21,9 +20,5 @@ void Game::update()
 void Game::draw()
 {
     if (state == GameState::Menu)
-        menu.draw();
-    else
-    {
-        // Ton jeu ici — pour l'instant juste un écran noir
-    }
+        menu.draw(window);
 }
